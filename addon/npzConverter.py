@@ -7,6 +7,7 @@ import os
 import numpy as np
 import nibabel as nib
 import nrrd
+from nibabel.orientations import ornt_transform, axcodes2ornt, inv_ornt_aff
 
 Base = "D:/Ratlas/Rat_Atlas_2520Project"
 list = "D:/Ratlas/RatlasTransUNet/list"
@@ -68,7 +69,7 @@ def normalize(img):
     
 
 def readNpz():
-    train_npz_dir = "/home/steve/RatlasLiteMedSAM/inference_test/test_result/preds/MR_cral"
+    train_npz_dir = "/home/steve/RatlasLiteMedSAM/inference_test/test_result/preds/MR_cral/"
     name = 'MR_cral_IMG8_Week10_processed.npz'
     path = os.path.join(train_npz_dir, name)
     npz_data = np.load(path)
@@ -79,14 +80,21 @@ def readNpz():
 
     # # Create a NIfTI image from the numpy array
     # img = nib.Nifti1Image(npz_data["segs"], affine=np.eye(4))
-    affine = [[ 0, 1, 0, 0],
-              [-1, 0, 0, 0],
-              [ 0, 0, 1, 0],
-              [ 0, 0, 0, 1]]
-    img = nib.Nifti1Image(npz_data["segs"].transpose(1,2,0), affine=affine) # (slice, h, w) to (h, w, slice)
+    img = nib.Nifti1Image(npz_data["segs"].transpose(1,2,0), affine=np.eye(4)) # (slice, h, w) to (h, w, slice)
 
-    # Save the NIfTI image to a file
-    nib.save(img, 'MR_cral_IMG8_Week10_processed_seg.nii')
+    ## reorient the image
+    current_orientation = nib.aff2axcodes(img.affine)
+    print(current_orientation)
+    target_orientation = ('A', 'R', 'S')
+    ornt = ornt_transform(axcodes2ornt(current_orientation), axcodes2ornt(target_orientation))
+    reoriented_img = img.as_reoriented(ornt)
+    new_affine = inv_ornt_aff(ornt, img.shape)
+    nib.Nifti1Image(reoriented_img.get_fdata(), new_affine).to_filename('MR_cral_IMG8_Week10_processed_seg.nii')
+
+    # # Save the NIfTI image to a file
+    # nib.save(img, 'MR_cral_IMG8_Week10_processed_seg.nii')
+
+
 
 def generateSegsNpz(npz_data):
     # change gts to segs

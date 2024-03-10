@@ -30,9 +30,9 @@ def gather_files(root_dir, keep_suffixs=['jpg', 'png']):
 # This code could be work correctlly
 # ----------------------------------------------------------------------------
 
-root_dir = '/home/steve/RatlasLiteMedSAM/inference_test/data/labels'
+root_dir = '/home/steve/RatlasLiteMedSAM/data/ratlas/labels'
 allfile, filelist = gather_files(root_dir, keep_suffixs=['nrrd'])
-baseDir = os.path.normpath('/home/steve/RatlasLiteMedSAM/inference_test/data/labels')
+baseDir = os.path.normpath('/home/steve/RatlasLiteMedSAM/data/ratlas/labels')
 files = glob(baseDir+'/*.nrrd')
 
 i = 1

@@ -6,3 +6,4 @@ python inference_3D.py \
     --save_overlay \
     -png_save_dir /home/steve/RatlasLiteMedSAM/inference_test/test_result/preds/MR_cral_overlay \
     --overwrite
+
