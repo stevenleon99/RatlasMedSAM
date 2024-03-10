@@ -8,7 +8,6 @@
 *.npz
 *.csv
 *.log
-*.png
 *.tar.gz
 data/
 
