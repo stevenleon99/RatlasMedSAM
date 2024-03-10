@@ -77,7 +77,7 @@ def readNpz():
     print(npz_data.keys())
     # print(npz_data['imgs'].shape)
     # print(npz_data['gts'].shape)
-
+    
     # # Create a NIfTI image from the numpy array
     # img = nib.Nifti1Image(npz_data["segs"], affine=np.eye(4))
     img = nib.Nifti1Image(npz_data["segs"].transpose(1,2,0), affine=np.eye(4)) # (slice, h, w) to (h, w, slice)

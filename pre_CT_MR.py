@@ -151,6 +151,8 @@ def preprocess(name, npz_path):
             lower_bound, upper_bound = np.percentile(
                 image_data[image_data > 0], 0.5
             ), np.percentile(image_data[image_data > 0], 99.5)
+            print("img lowerbound: %f -> 6000  upperbound: %f" %(lower_bound, upper_bound))
+            lower_bound = 6000
             image_data_pre = np.clip(image_data, lower_bound, upper_bound)
             image_data_pre = (
                 (image_data_pre - np.min(image_data_pre))
