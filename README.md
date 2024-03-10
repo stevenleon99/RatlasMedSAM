@@ -27,13 +27,13 @@ sh inference.sh
 
 ### Result
 <img src="asset/MR_cral_IMG8_Week10_processed.png" width="400" alt="result">
-
+>
 > MR_cral_IMG8_Week10_processed.npz dsc value: 0.862131
 > MR_cral_IMG8_Week10_processed.npz,dsc value: 0.8643 (two more training cases)
 > MR_cral_IMG8_Week10_processed.npz,dsc value: 0.875 (earlystop)
 > MR_cral_IMG8_Week10_processed.npz,dsc value: 0.863877 (dedicated mask)
 > MR_cral_IMG8_Week10_processed.npz dsc value: 0.969804 (limit lower boundary to 6000)
-
+>
 ### Validation
 <img src="asset/img2.png" width="400" alt="validation">
 
